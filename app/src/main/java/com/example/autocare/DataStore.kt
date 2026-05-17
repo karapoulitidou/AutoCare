@@ -3,6 +3,7 @@ package com.example.autocare
 import android.content.Context
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import androidx.core.content.edit
 
 fun saveData(context: Context) {
 
@@ -14,11 +15,11 @@ fun saveData(context: Context) {
 
     val gson = Gson()
 
-    prefs.edit()
-        .putString("cars", gson.toJson(carsList))
-        .putString("actions", gson.toJson(actionsList))
-        .putString("users", gson.toJson(usersList))
-        .apply()
+    prefs.edit {
+        putString("cars", gson.toJson(carsList))
+            .putString("actions", gson.toJson(actionsList))
+            .putString("users", gson.toJson(usersList))
+    }
 }
 
 fun loadData(context: Context) {
